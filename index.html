@@ -1,1 +1,789 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tropa Extremamente Dura — Gravadora independente</title>
+<meta name="description" content="Tropa Extremamente Dura: gravadora independente dedicada à descoberta, produção e desenvolvimento de artistas. Onde o talento ganha voz e a música vira legado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Instrument+Sans:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+<style>
+  :root {
+    --ink: #0A0A0A;
+    --panel: #15130E;
+    --panel-2: #1F1B11;
+    --gold: #D4AF37;
+    --gold-bright: #E6C75A;
+    --gold-soft: rgba(212, 175, 55, .38);
+    --white: #FFFFFF;
+    --muted: #B8B2A3;
+    --line: rgba(255, 255, 255, .14);
+    --display: 'Big Shoulders Display', 'Oswald', 'Arial Narrow', Impact, sans-serif;
+    --body: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --pad: clamp(1.25rem, 4vw, 3rem);
+    --header-h: 4.5rem;
+    color-scheme: dark;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #0A0A0A; --panel: #15130E; --panel-2: #1F1B11; --gold: #D4AF37;
+      --white: #FFFFFF; --muted: #B8B2A3; --line: rgba(255, 255, 255, .14);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #0A0A0A; --panel: #15130E; --panel-2: #1F1B11; --gold: #D4AF37;
+    --white: #FFFFFF; --muted: #B8B2A3; --line: rgba(255, 255, 255, .14);
+  }
+  @media (max-width: 720px) { :root { --header-h: 6.25rem; } }
 
+  html {
+    scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+    scroll-behavior: smooth;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--white);
+    font: 400 1.0625rem/1.6 var(--body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  img, svg { max-width: 100%; }
+  a { color: inherit; }
+  a:focus-visible, .btn:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  /* ---------- Topo ---------- */
+  .topo {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
+    background: rgba(10, 10, 10, .93);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topo-in {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 1.5rem;
+    max-width: 1200px;
+    min-height: var(--header-h);
+    margin: 0 auto;
+    padding: .5rem var(--pad);
+  }
+  .marca {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: 1.3rem;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    line-height: 1;
+    text-decoration: none;
+    color: var(--white);
+    white-space: nowrap;
+  }
+  .menu { display: flex; align-items: center; gap: .25rem; }
+  .menu a {
+    color: var(--muted);
+    text-decoration: none;
+    padding: .55rem .8rem;
+    font-size: .97rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .menu a:hover { color: var(--white); }
+  .menu a.menu-cta {
+    color: var(--gold);
+    border: 1px solid var(--gold-soft);
+    border-radius: 2px;
+    margin-left: .5rem;
+  }
+  .menu a.menu-cta:hover { background: var(--gold); color: var(--ink); }
+  @media (max-width: 720px) {
+    .topo-in { flex-wrap: wrap; align-content: center; gap: .25rem; }
+    .menu {
+      order: 3;
+      width: calc(100% + 1.6rem);
+      margin: 0 -.8rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .menu::-webkit-scrollbar { display: none; }
+    .menu a.menu-cta { margin-left: 0; border-color: transparent; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    min-height: calc(100svh - var(--header-h) - env(safe-area-inset-top, 0px));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(2.5rem, 7vw, 5rem) var(--pad) 0;
+    background:
+      radial-gradient(55% 70% at 88% 0%, rgba(212, 175, 55, .22), transparent 62%),
+      radial-gradient(40% 50% at 0% 100%, rgba(212, 175, 55, .07), transparent 70%),
+      var(--ink);
+    border-bottom: 1px solid var(--gold-soft);
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: .09;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .hero-in {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .marca-grande {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(2.7rem, 14.5vw, 14rem);
+    line-height: .86;
+    letter-spacing: .005em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .linha { display: block; overflow: hidden; padding-bottom: .03em; }
+  .linha > span {
+    display: block;
+    animation: sobe 1.05s cubic-bezier(.2, .7, .1, 1) backwards;
+  }
+  .linha:nth-child(2) > span { animation-delay: .14s; }
+  .linha:nth-child(3) > span { animation-delay: .28s; }
+  @keyframes sobe { from { transform: translateY(105%); } to { transform: none; } }
+
+  .hero-base {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.75rem 3rem;
+    margin-top: clamp(1.75rem, 4vw, 2.75rem);
+    padding-bottom: clamp(1.75rem, 4vw, 2.5rem);
+  }
+  .slogan {
+    margin: 0;
+    max-width: 20ch;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(1.7rem, 3.6vw, 2.6rem);
+    line-height: 1.05;
+    color: var(--white);
+  }
+  .acoes { display: flex; flex-wrap: wrap; gap: .75rem; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0 1.6rem;
+    font: 600 1rem/1 var(--body);
+    text-decoration: none;
+    border: 1.5px solid var(--gold);
+    border-radius: 2px;
+    color: var(--gold);
+    background: transparent;
+    transition: background-color .2s, color .2s, border-color .2s;
+  }
+  .btn:hover { background: var(--gold); color: var(--ink); }
+  .btn.btn-cheio { background: var(--gold); color: var(--ink); }
+  .btn.btn-cheio:hover { background: var(--gold-bright); border-color: var(--gold-bright); }
+
+  .creditos {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.1rem 0 1.25rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: .92rem;
+  }
+
+  /* ---------- Secções ---------- */
+  .sec { padding: clamp(4rem, 9vw, 7.5rem) var(--pad) 0; }
+  .sec-in {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gold-soft);
+  }
+  .tit {
+    margin: 0 0 clamp(2rem, 5vw, 3.5rem);
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(2.9rem, 8.5vw, 6.25rem);
+    line-height: .9;
+    letter-spacing: .01em;
+    text-transform: uppercase;
+  }
+  .sub {
+    margin: clamp(3rem, 6vw, 4.5rem) 0 1.5rem;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3.6vw, 2.5rem);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* Sobre */
+  .lead {
+    margin: 0;
+    max-width: 34em;
+    font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+    line-height: 1.45;
+    font-weight: 500;
+  }
+  .mv {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 2rem 3rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+  .mv h3 {
+    margin: 0 0 .5rem;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 2rem;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .mv p { margin: 0; max-width: 30em; font-size: 1.2rem; color: var(--white); }
+
+  .fund {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 1.25rem;
+  }
+  .fundador {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+  }
+  .fundador .retrato { width: 7.5rem; flex: none; }
+  .nome {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(1.7rem, 3vw, 2.1rem);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .papel { margin: .4rem 0 0; color: var(--muted); font-size: 1rem; }
+
+  .retrato {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    color: rgba(212, 175, 55, .5);
+    background:
+      radial-gradient(90% 60% at 50% 0%, rgba(212, 175, 55, .18), transparent 70%),
+      linear-gradient(170deg, var(--panel-2), var(--ink) 75%);
+    border: 1px solid var(--line);
+  }
+  .retrato svg {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 72%;
+    height: auto;
+    transform: translateX(-50%);
+  }
+
+  .retrato img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+    display: block;
+  }
+
+  /* Artistas */
+  .artistas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 1.5rem;
+  }
+  .artista .retrato { aspect-ratio: 3 / 4; }
+  .artista .nome { margin-top: 1rem; }
+
+  /* Lançamentos */
+  .lancs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 2rem;
+  }
+  .capa {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    color: rgba(212, 175, 55, .62);
+    border: 1px solid var(--gold-soft);
+  }
+  .capa.capa-a {
+    background:
+      radial-gradient(70% 70% at 25% 15%, rgba(212, 175, 55, .42), transparent 60%),
+      linear-gradient(140deg, #2B220B, var(--ink) 80%);
+  }
+  .capa.capa-b {
+    background:
+      radial-gradient(70% 70% at 80% 85%, rgba(212, 175, 55, .34), transparent 60%),
+      linear-gradient(320deg, #241D0A, var(--ink) 80%);
+  }
+  .capa svg {
+    position: absolute;
+    inset: 12%;
+    width: 76%;
+    height: 76%;
+  }
+  .capa img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .lanc-tit {
+    margin: 1.1rem 0 0;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(1.9rem, 3.4vw, 2.5rem);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .lanc-info { margin: .4rem 0 0; color: var(--muted); }
+
+  .player {
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    color-scheme: dark;
+  }
+  .player:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  /* Serviços */
+  .serv { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
+  .serv li {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: .5rem 2rem;
+    align-items: baseline;
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .serv h3 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(1.9rem, 4vw, 2.9rem);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .serv p { margin: 0; max-width: 32em; color: var(--muted); font-size: 1.2rem; }
+  @media (max-width: 640px) { .serv li { grid-template-columns: 1fr; } }
+
+  /* Galeria */
+  .gal {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .foto {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    color: rgba(212, 175, 55, .5);
+    border: 1px solid var(--line);
+    background: linear-gradient(150deg, var(--panel-2), var(--ink));
+  }
+  .foto.foto-grande { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+  .foto.foto-b { background: linear-gradient(210deg, #241D0A, var(--ink)); }
+  .foto.foto-c { background: linear-gradient(120deg, #1A170E, var(--ink)); }
+  .foto svg {
+    position: absolute;
+    left: 50%;
+    top: 46%;
+    width: min(55%, 260px);
+    height: auto;
+    transform: translate(-50%, -50%);
+  }
+  .foto p {
+    position: absolute;
+    left: 1rem;
+    bottom: .85rem;
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  @media (max-width: 720px) {
+    .gal { grid-template-columns: 1fr; }
+    .foto.foto-grande { grid-column: auto; grid-row: auto; aspect-ratio: 4 / 3; }
+  }
+
+  /* Contacto */
+  .contacto-in {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 2.5rem 4rem;
+    align-items: start;
+  }
+  .contacto-chamada { margin: 0 0 1rem; max-width: 22ch; font-size: clamp(1.3rem, 2.4vw, 1.75rem); font-weight: 500; line-height: 1.35; }
+  .email {
+    display: inline-block;
+    margin: 0 0 1.75rem;
+    font-size: clamp(1.1rem, 4.4vw, 2.4rem);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--gold);
+    text-decoration-thickness: 1px;
+    text-underline-offset: .25em;
+    overflow-wrap: anywhere;
+  }
+  .email:hover { color: var(--gold-bright); }
+  .dados { margin: 0; display: grid; gap: 1.5rem; }
+  .dados dt { color: var(--muted); font-size: .95rem; }
+  .dados dd {
+    margin: .15rem 0 0;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 1.9rem;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+  .dados dd.redes { font-family: var(--body); font-weight: 500; font-size: 1.15rem; text-transform: none; }
+
+  .dados dd.redes a {
+    color: var(--gold);
+    text-decoration-thickness: 1px;
+    text-underline-offset: .25em;
+  }
+  .dados dd.redes a:hover { color: var(--gold-bright); }
+
+  .acoes-contacto { display: flex; flex-wrap: wrap; gap: .75rem; }
+  button.btn { cursor: pointer; }
+  .aviso-copia { min-height: 1.5em; margin: .9rem 0 0; color: var(--gold); font-size: .95rem; }
+
+  /* Rodapé */
+  .rodape {
+    margin-top: clamp(4rem, 9vw, 7.5rem);
+    padding: 1.75rem var(--pad) 2.25rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: .93rem;
+  }
+  .rodape p { max-width: 1200px; margin: 0 auto; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .linha > span { animation: none; }
+    .btn { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="pessoa" viewBox="0 0 100 125">
+      <circle cx="50" cy="40" r="21" fill="currentColor"/>
+      <path d="M8 125c0-32 17-50 42-50s42 18 42 50z" fill="currentColor"/>
+    </symbol>
+    <symbol id="disco" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width=".8"/>
+      <circle cx="50" cy="50" r="33" fill="none" stroke="currentColor" stroke-width=".8"/>
+      <circle cx="50" cy="50" r="26" fill="none" stroke="currentColor" stroke-width=".8"/>
+      <circle cx="50" cy="50" r="14" fill="currentColor"/>
+      <circle cx="50" cy="50" r="3" fill="#0A0A0A"/>
+    </symbol>
+    <symbol id="onda" viewBox="0 0 120 60">
+      <g fill="currentColor">
+        <rect x="2" y="24" width="4" height="12" rx="2"/><rect x="12" y="16" width="4" height="28" rx="2"/>
+        <rect x="22" y="8" width="4" height="44" rx="2"/><rect x="32" y="20" width="4" height="20" rx="2"/>
+        <rect x="42" y="2" width="4" height="56" rx="2"/><rect x="52" y="14" width="4" height="32" rx="2"/>
+        <rect x="62" y="6" width="4" height="48" rx="2"/><rect x="72" y="18" width="4" height="24" rx="2"/>
+        <rect x="82" y="10" width="4" height="40" rx="2"/><rect x="92" y="22" width="4" height="16" rx="2"/>
+        <rect x="102" y="14" width="4" height="30" rx="2"/><rect x="112" y="26" width="4" height="8" rx="2"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="topo">
+  <div class="topo-in">
+    <a class="marca" href="#inicio">Tropa Extremamente Dura</a>
+    <nav class="menu" aria-label="Principal">
+      <a href="#sobre">Sobre</a>
+      <a href="#artistas">Artistas</a>
+      <a href="#lancamentos">Lançamentos</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#galeria">Galeria</a>
+      <a class="menu-cta" href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="inicio" aria-labelledby="titulo-principal">
+    <div class="hero-in">
+      <h1 class="marca-grande" id="titulo-principal">
+        <span class="linha"><span>Tropa</span></span>
+        <span class="linha"><span>Extremamente</span></span>
+        <span class="linha"><span>Dura</span></span>
+      </h1>
+      <div class="hero-base">
+        <p class="slogan">Onde o talento ganha voz e a música vira legado.</p>
+        <div class="acoes">
+          <a class="btn btn-cheio" href="#lancamentos">Ouvir lançamentos</a>
+          <a class="btn" href="#sobre">Conhecer a gravadora</a>
+        </div>
+      </div>
+    </div>
+    <div class="creditos">Fundada por Adair Chiteia e cofundada por Kelson Júlio</div>
+  </section>
+
+  <section class="sec" id="sobre" aria-labelledby="t-sobre">
+    <div class="sec-in">
+      <h2 class="tit" id="t-sobre">Sobre</h2>
+      <p class="lead">A Tropa Extremamente Dura é uma gravadora independente dedicada à descoberta, produção e desenvolvimento de artistas. O nosso objetivo é elevar a música urbana com autenticidade, qualidade e visão internacional.</p>
+
+      <div class="mv">
+        <div>
+          <h3>Missão</h3>
+          <p>Transformar talento em carreira.</p>
+        </div>
+        <div>
+          <h3>Visão</h3>
+          <p>Ser uma referência da música em Angola e além-fronteiras.</p>
+        </div>
+      </div>
+
+      <h3 class="sub">Fundadores</h3>
+      <div class="fund">
+        <article class="fundador">
+          <div class="retrato">
+            <img src="assets/adair.jpg" alt="Adair Chiteia" width="200" height="266">
+          </div>
+          <div>
+            <h4 class="nome">Adair Chiteia</h4>
+            <p class="papel">Fundador e Diretor Executivo</p>
+          </div>
+        </article>
+        <article class="fundador">
+          <div class="retrato" role="img" aria-label="Espaço para a foto de Kelson Júlio">
+            <svg viewBox="0 0 100 125" aria-hidden="true"><use href="#pessoa" width="100" height="125"/></svg>
+          </div>
+          <div>
+            <h4 class="nome">Kelson Júlio</h4>
+            <p class="papel">Co-fundador e Diretor Criativo</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="artistas" aria-labelledby="t-artistas">
+    <div class="sec-in">
+      <h2 class="tit" id="t-artistas">Artistas</h2>
+      <div class="artistas">
+        <article class="artista">
+          <div class="retrato">
+            <img src="assets/ayala-dos-reys.jpg" alt="Ayala Dos Reys no estúdio, de boné e óculos escuros" width="820" height="1093">
+          </div>
+          <h3 class="nome">Ayala Dos Reys</h3>
+          <p class="papel">Trap / R&amp;B / Hip Hop</p>
+        </article>
+        <article class="artista">
+          <div class="retrato" role="img" aria-label="Espaço para a foto do artista">
+            <svg viewBox="0 0 100 125" aria-hidden="true"><use href="#pessoa" width="100" height="125"/></svg>
+          </div>
+          <h3 class="nome">Nome do Artista</h3>
+          <p class="papel">R&amp;B</p>
+        </article>
+        <article class="artista">
+          <div class="retrato" role="img" aria-label="Espaço para a foto do artista">
+            <svg viewBox="0 0 100 125" aria-hidden="true"><use href="#pessoa" width="100" height="125"/></svg>
+          </div>
+          <h3 class="nome">Novo Talento</h3>
+          <p class="papel">Hip Hop</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="lancamentos" aria-labelledby="t-lanc">
+    <div class="sec-in">
+      <h2 class="tit" id="t-lanc">Lançamentos</h2>
+      <div class="lancs">
+        <article>
+          <div class="capa capa-a">
+            <img src="assets/capa-extremamente-duro-vol1.jpg" alt="Capa do EP Extremamente Duro Vol. 1" width="800" height="800">
+          </div>
+          <h3 class="lanc-tit">Extremamente Duro Vol. 1</h3>
+          <p class="lanc-info">EP, 2026</p>
+        </article>
+        <article>
+          <div class="capa">
+            <img src="assets/capa-caminhando.jpg" alt="Capa do EP Caminhando" width="250" height="250">
+          </div>
+          <h3 class="lanc-tit">Caminhando</h3>
+          <p class="lanc-info">EP, 2024</p>
+        </article>
+        <article>
+          <div class="capa">
+            <img src="assets/capa-teu-drama.jpg" alt="Capa do single Teu Drama, de Ayala Dos Reys" width="800" height="800">
+          </div>
+          <h3 class="lanc-tit">Teu Drama</h3>
+          <p class="lanc-info">Single, Ayala Dos Reys</p>
+          <audio class="player" controls preload="metadata" aria-label="Ouvir Teu Drama, de Ayala Dos Reys" src="assets/teu-drama.mp3"></audio>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="servicos" aria-labelledby="t-serv">
+    <div class="sec-in">
+      <h2 class="tit" id="t-serv">Serviços</h2>
+      <ul class="serv">
+        <li>
+          <h3>Gravação Profissional</h3>
+          <p>Captação de voz e produção.</p>
+        </li>
+        <li>
+          <h3>Mix &amp; Master</h3>
+          <p>Qualidade pronta para streaming.</p>
+        </li>
+        <li>
+          <h3>Videoclipes</h3>
+          <p>Produção audiovisual.</p>
+        </li>
+        <li>
+          <h3>Gestão Artística</h3>
+          <p>Imagem, marketing e distribuição.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="galeria" aria-labelledby="t-gal">
+    <div class="sec-in">
+      <h2 class="tit" id="t-gal">Galeria</h2>
+      <div class="gal">
+        <figure class="foto foto-grande" style="margin:0" role="img" aria-label="Espaço para foto do estúdio">
+          <svg viewBox="0 0 120 60" aria-hidden="true"><use href="#onda" width="120" height="60"/></svg>
+          <p>Estúdio</p>
+        </figure>
+        <figure class="foto foto-b" style="margin:0" role="img" aria-label="Espaço para foto de uma sessão de gravação">
+          <svg viewBox="0 0 120 60" aria-hidden="true"><use href="#onda" width="120" height="60"/></svg>
+          <p>Gravação</p>
+        </figure>
+        <figure class="foto foto-c" style="margin:0" role="img" aria-label="Espaço para foto de produção musical">
+          <svg viewBox="0 0 120 60" aria-hidden="true"><use href="#onda" width="120" height="60"/></svg>
+          <p>Produção</p>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="contacto" aria-labelledby="t-contacto">
+    <div class="sec-in">
+      <h2 class="tit" id="t-contacto">Contacto</h2>
+      <div class="contacto-in">
+        <div>
+          <p class="contacto-chamada">Parcerias, gravações e novos talentos: escreve-nos.</p>
+          <a class="email" href="mailto:ayaladosreys11@gmail.com?subject=Parceria%20com%20a%20Tropa%20Extremamente%20Dura" target="_blank" rel="noopener noreferrer">ayaladosreys11@gmail.com</a>
+          <div class="acoes-contacto">
+            <a class="btn btn-cheio" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=ayaladosreys11@gmail.com&amp;su=Parceria%20com%20a%20Tropa%20Extremamente%20Dura" target="_blank" rel="noopener noreferrer">Escrever no Gmail</a>
+            <a class="btn" href="mailto:ayaladosreys11@gmail.com?subject=Parceria%20com%20a%20Tropa%20Extremamente%20Dura" target="_blank" rel="noopener noreferrer">Abrir no meu email</a>
+            <button type="button" class="btn" id="copiar-email" data-email="ayaladosreys11@gmail.com">Copiar email</button>
+          </div>
+          <p class="aviso-copia" id="aviso-copia" role="status" aria-live="polite"></p>
+        </div>
+        <dl class="dados">
+          <div>
+            <dt>Fundador</dt>
+            <dd>Adair Chiteia</dd>
+          </div>
+          <div>
+            <dt>Co-fundador</dt>
+            <dd>Kelson Júlio</dd>
+          </div>
+          <div>
+            <dt>Redes sociais</dt>
+            <dd class="redes"><a href="https://www.instagram.com/tropaextremamente_dura/" target="_blank" rel="noopener noreferrer">Instagram</a> / YouTube / TikTok</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <p>© 2026 Tropa Extremamente Dura. Todos os direitos reservados. Fundada por Adair Chiteia e cofundada por Kelson Júlio.</p>
+</footer>
+
+<script>
+(function () {
+  var btn = document.getElementById('copiar-email');
+  var aviso = document.getElementById('aviso-copia');
+  if (!btn) return;
+  function ok() { aviso.textContent = 'Email copiado: ayaladosreys11@gmail.com'; }
+  function falhou() { aviso.textContent = 'Não foi possível copiar. O email é ayaladosreys11@gmail.com'; }
+  function copiaAntiga(texto) {
+    try {
+      var t = document.createElement('textarea');
+      t.value = texto;
+      t.setAttribute('readonly', '');
+      t.style.position = 'fixed';
+      t.style.opacity = '0';
+      document.body.appendChild(t);
+      t.select();
+      var feito = document.execCommand('copy');
+      document.body.removeChild(t);
+      feito ? ok() : falhou();
+    } catch (e) { falhou(); }
+  }
+  btn.addEventListener('click', function () {
+    var texto = btn.getAttribute('data-email');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texto).then(ok, function () { copiaAntiga(texto); });
+    } else {
+      copiaAntiga(texto);
+    }
+  });
+})();
+</script>
+</body>
+</html>
